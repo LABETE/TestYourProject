@@ -1,0 +1,62 @@
+{% extends "projects/base.html" %}
+{% load static %}
+
+{% block head_title %}Project-Detail Project{% endblock head_title %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+	    {% if request.user in co_owners or request.user.id = object.owner_id %}
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<h2>{{ object.name }}</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong>Owner:</strong> 
+				<br/> {{ object.owner }}</p>
+				<p><strong>Description:</strong> 
+				<br/> {{ object.description }}</p>
+				<p><strong>Start Date:</strong> 
+				{% if object.start_date %}
+				<br/> {{ object.start_date }}</p>
+				{% else %}
+				<br/> {{ '' }}</p>
+				{% endif %}
+				<p><strong>End Date:</strong> 
+				{% if object.end_date %}
+				<br/> {{ object.end_date }}</p>
+				{% else %}
+				<br/> {{ '' }}</p>
+				{% endif %}
+				<p><strong>Co Owners:</strong> 
+				{% if co_owners %}
+				<br/> {{ co_owners|join:", " }}</p>
+				{% else %}
+				<br/> {{ '' }}</p>
+				{% endif %}
+				<p><strong>Created:</strong> 
+				<br/> {{ object.created }}</p>
+				<p><strong>Modified:</strong> 
+				<br/> {{ object.modified }}</p>
+			</div>		
+		</div>
+		{% else %}
+		    <p>You have no access to this project, please contact to the project owner, 
+		    add the project with the following button or add it in the search project dashboard</p>
+		    <a href=""><button type="button" class="btn btn-primary">Add Project</button></a>
+		{% endif %}
+		{% if object.owner_id = request.user.id %}
+			<a href="{% url 'projects:update' project.name %}"><button type="button" class="btn btn-primary">Edit</button></a>
+		{% endif %}
+	</div>
+</div>
+{% endblock content %}
+
+
+				
+			    
+			    
+			    
+			    
+			    

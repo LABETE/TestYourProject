@@ -1,0 +1,28 @@
+{% extends "projects/base.html" %}
+
+{% block head_title %}Project-Delete Project{% endblock head_title %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+	    {% if object.owner_id == request.user.id %}
+			<form action="" method="POST" class="form-horizontal" role="form">
+				<div class="panel panel-danger">
+				  	<div class="panel-body">
+				  		<div class="panel-heading">
+						<h3 class="panel-title">Are your sure you want to delete {{ object.name }}?</h3>
+				        </div>
+				        {% csrf_token %}
+				  		<div class="form-group">
+				  			<a href="{% url 'projects:delete' object.name %}"><button type="submit" class="btn btn-danger">YES</button></a>
+				  			<a href="{% url 'projects:list' %}"><button type="button" class="btn btn-primary">NO</button></a>
+				  		</div>
+					</div>
+				</div>
+			</form>
+		{% else %}
+		    <p>Only the project owner can delete a project</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock content %}

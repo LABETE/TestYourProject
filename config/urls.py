@@ -8,8 +8,10 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
+    url(r'^$', TemplateView.as_view(
+        template_name='pages/home.html'), name="home"),
+    url(r'^about/$',
+        TemplateView.as_view(template_name='pages/about.html'), name="about"),
 
     # Django Admin
     url(r'^admin/', include(admin.site.urls)),
@@ -17,6 +19,13 @@ urlpatterns = [
     # User management
     url(r'^users/', include("TestYourProject.users.urls", namespace="users")),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^projects/', include('projects.urls', namespace="projects")),
+    url(r'^defects/', include('defects.urls', namespace="defects")),
+    url(r'^cases/', include('cases.urls', namespace="cases")),
+    url(r'^case_details/',
+        include('casedetails.urls', namespace="casedetails")),
+    url(r'^api-auth/', include(
+        'rest_framework.urls', namespace="rest_framework")),
 
     # Your stuff: custom urls includes go here
 
