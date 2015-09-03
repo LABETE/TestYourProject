@@ -1,0 +1,71 @@
+<div class="container" ng-controller="ProjectListController" ng-show="authenticated">
+	<div class="row">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h2>Projects</h2>
+				</div>
+			</div>
+		</div>
+		<!-- Container of the list -->
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<!-- Button for create a new project -->
+					<div class="col-xs-3">
+						<button type="button" class="btn btn-primary" ui-sref="createProject">Create New Project</button>
+					</div>
+					<!-- Input for search projects -->
+					<div class="col-xs-4 col-xs-offset-2">
+						<input class="textinput textInput form-control" ng-model="q" type="search" placeholder="Search a project" aria-label="filter projects">	
+					</div>
+					<!-- List with all the projects -->
+					<ul class="list-group" ng-controller="UserListController">
+						<li class="list-group-item col-xs-7 col-sm-9" ng-repeat="project in projects | filter:q as results">
+							<!-- Graph of each project --> 
+							<progress><bar ng-repeat="graph in dctprojects[project.id]" value="graph.percent" type="{{graph.status_graph}}"><span>{{graph.sum}}/{{graph.percent}}%</span></bar></progress>
+							<!-- Status of the project -->
+							<div class="status col-xs-2" ng-repeat="statuschoice in statuschoices" ng-if="statuschoice.id==project.status" ng-style="{'background-color':statuschoice.color}">{{statuschoice.name}}</div>
+							<!-- Link to the test cases of the project and project name -->
+							<a ui-sref="cases({id:project.id})">
+								<h4 class="list-group-item-heading col-xs-10">{{project.name}}</h4>
+							</a>
+							<!-- Div that contain the settings of the project -->
+							<div class="col-xs-offset-2" ng-controller="displayController" id="filter_owner" ng-repeat="user in users" ng-if="user.username==username">
+								<div class="col-xs-offset-10">
+									<!-- Create Test Cases -->
+									<a ng-click="displayDropFile()"><span class="glyphicon glyphicon-open-file"></span></a>
+									<!-- Detail Link -->
+									<a ui-sref="detailProject({id:project.id})"><span class="glyphicon glyphicon-eye-open"></span></a>
+									<!-- Edit link -->
+									<a ui-sref="editProject({id:project.id})"><span class="glyphicon glyphicon-pencil" ng-show="user.id == project.owner"></span></a>
+									<!-- Delete link -->
+									<a ng-click="displayDelete()"><span class="glyphicon glyphicon-remove" ng-show="user.id == project.owner"></span></a>
+								</div>
+								<!-- load the files_section.html template -->
+								<div ng-show="displayDragDropFile" ng-include="'/static/templates/projects/files_section.html'">
+								</div>
+								<!-- Contain the delete template -->
+								<div ng-show="showDelete">
+							        <div class="modal-body">
+							            Are you sure you want to delete <b>{{ project.name }}</b>, it will delete all the test cases and defects associated with this project?
+							        </div>
+							        <div class="modal-footer">
+							            <button class="btn btn-default" type="button" ng-click="cancelDelete()">Cancel</button>
+							            <button class="btn btn-danger" type="button" ng-click="deleteProject(project)">Delete!</button>
+							        </div>
+							    </div>
+							</div>
+					    </li>
+					    <li class="list-group-item col-xs-7 col-sm-9" ng-if="results.length == 0">
+					    	<strong>No results found</strong>
+					    </li>
+					</ul>
+					<p ng-hide="projects">You have no projects</p>
+					<br/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

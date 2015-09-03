@@ -1,0 +1,40 @@
+{% extends "projects/base.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}Project-Create New Project{% endblock head_title %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			{% if object %}
+			    {% if object.owner_id == request.user.id %}
+					<h1>{% block updateheader %}Update Project{% endblock updateheader %}</h1>
+					<form action="{% url 'projects:update' object.name %}" method="POST" class="horizontal-form" role="form">
+						{% csrf_token %}
+						{{ form|crispy }}
+						<div class="control-group">
+							<div class="controls">
+								<button type="submit" class="btn btn-primary">Update</button>
+							</div>
+						</div>
+					</form>
+				{% else %}
+				    <p>If you are not the project owner you can not modify the project</p>
+				{% endif %}
+			{% else %}
+				<h1>{% block createheader %}New Project{% endblock createheader %}</h1>
+				<form action="{% url 'projects:create' %}" method="POST" class="horizontal-form" role="form">
+					{% csrf_token %}
+					{{ form|crispy }}
+					<div class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn btn-primary">Create</button>
+						</div>
+					</div>
+				</form>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

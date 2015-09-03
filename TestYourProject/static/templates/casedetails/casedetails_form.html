@@ -1,0 +1,140 @@
+<div class="container" ng-controller="CaseDetailListController">
+	<div class="row">
+		<div class="container" ng-controller="ProjectListController">
+			<div class="row">
+				<div class="col-xs-12" ng-repeat="project in projects" ng-if="project.id==projectid">
+					<h3><a ui-sref="projects">Projects</a>/<a ui-sref="cases({id:projectid})">{{project.name}}</a>/Case Details</h3>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th class="col-xs-2"></th>
+								<th class="col-xs-2">Expected</th>
+								<th class="col-xs-2">Actual</th>
+								<th class="col-xs-2">Input</th>
+								<th class="col-xs-2">Output</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="casedetail in casedetails">
+								<td>
+									<div id="steps" ng-controller="DisplayStepsController">
+										<a ng-click="deleteCaseDetail(casedetail)"><span class="glyphicon glyphicon-remove"></span></a>
+										<a ng-click="displaychangestep()"><span class="glyphicon glyphicon-sort"></span></a>
+										<div id="stepnum" ng-show="displaystep">
+											<label for="id_step" class="control-label">Place instead of step:</label>
+											<div class="controls">
+												<input ng-model="casedetail.stepmod" type="text" name="step" id="id_step" class="textinput textInput form-control" maxlength="200" value="" ng-required="true" pattern="" title="">
+											</div>
+											<button ng-click="updownstepCaseDetail(casedetail); displaychangestep()" type="button" class="btn btn-primary">Accept</button>
+										</div>
+									</div>
+									<!-- Step -->
+									<div id="div_id_step">
+										<div id="id_step" name="step" class="control-label">Step: {{casedetail.step}}</div>
+									</div>
+									<!-- Status -->
+									<div id="div_id_status">
+										<label for="id_status" class="control-label">Status</label>
+										<div class="controls">
+											<ui-select on-select="changeCaseDetailStatus(casedetail)" ng-model="casedetail.status" name="status" theme="bootstrap" id="id_status">	
+												<ui-select-match>{{$select.selected.name}}
+												</ui-select-match>
+												<ui-select-choices repeat="choice.id as choice in statuschoices | filter: $select.search">
+													<div ng-bind-html="choice.name | highlight: $select.search"></div>
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+									<!-- Defect -->
+									<div id="div_id_defect">
+										<label for="id_defect" class="control-label">Defect: {{casedetail.defect_id_displayed}}</label>
+										<div class="controls">
+											<ui-select on-select="changeCaseDetailDefect(casedetail)" ng-model="casedetail.defect_id" name="defect" theme="bootstrap" id="id_defect">	
+												<ui-select-match>{{$select.selected.id_displayed}}
+												</ui-select-match>
+												<ui-select-choices repeat="defect.id as defect in defects | filter: $select.search">
+													<div ng-bind-html="defect.id_displayed | highlight: $select.search"></div>
+													<span ng-bind-html="defect.name | highlight: $select.search"></span>
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div id="div_id_expected">
+										<div class="controls">
+											<textarea ng-blur="changeCaseDetail(casedetail)"ng-model="casedetail.expected" rows="5" name="expected" id="id_expected" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+										</div>
+									</div>
+								</td>
+								<td>
+									<div id="div_id_actual">
+										<div class="controls">
+											<textarea ng-blur="changeCaseDetail(casedetail)" ng-model="casedetail.actual" rows="5" name="actual" id="id_actual" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+										</div>
+									</div>
+								</td>
+								<td>
+									<div id="div_id_input">
+										<textarea ng-blur="changeCaseDetail(casedetail)" ng-model="casedetail.input_data" rows="5" name="input" id="id_input" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+									</div>
+								</td>
+								<td>
+									<div id="div_id_output">
+										<textarea ng-blur="changeCaseDetail(casedetail)" ng-model="casedetail.output_data" rows="5" name="output" id="id_output" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="steps">
+										<div id="stepnum">
+											<label for="id_step" class="control-label">Place instead of step:</label>
+											<div class="controls">
+												<input ng-model="casedetailadd.step" type="text" name="step" id="id_step" class="textinput textInput form-control" maxlength="200" value="" ng-required="true" pattern="" title="">
+											</div>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div id="div_id_expected">
+										<div class="controls">
+											<textarea ng-model="casedetailadd.expected" rows="5" name="expected" id="id_expected" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+										</div>
+									</div>
+								</td>
+								<td>
+									<div id="div_id_actual">
+										<div class="controls">
+											<textarea ng-model="casedetailadd.actual" rows="5" name="actual" id="id_actual" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+										</div>
+									</div>
+								</td>
+								<td>
+									<div id="div_id_input">
+										<textarea ng-model="casedetailadd.input_data" rows="5" name="input" id="id_input" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+									</div>
+								</td>
+								<td>
+									<div id="div_id_output">
+										<textarea ng-model="casedetailadd.output_data" rows="5" name="output" id="id_output" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div id="plus">
+						<a ng-click="createCaseDetail()"><span class="glyphicon glyphicon-plus"></span></a>
+					</div>
+					<br/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

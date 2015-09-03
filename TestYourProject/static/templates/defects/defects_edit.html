@@ -1,0 +1,18 @@
+<div class="container" ng-controller="DefectEditController" ng-show="authenticated">
+	<div class="row">
+		<div class="col-xs-3">
+			<a ui-sref="defects"><h3>Defects</h3></a>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h2>Edit Defect</h2>
+			<form class="form-horizontal" ng-submit="updateDefect()" role="form" novalidate>
+				<div ng-include="'/static/templates/defects/defects_form.html'"></div>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-primary">Edit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

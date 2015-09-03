@@ -1,0 +1,37 @@
+<div class="container" ng-controller="DefectListController" ng-show="authenticated">
+	<div class="row">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h2>Defects</h2>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="col-xs-3">
+						<button type="button" class="btn btn-primary" ui-sref="createDefect">Create New Defect</button>
+					</div>
+					<div class="col-xs-4 col-xs-offset-2">
+						<input class="textinput textInput form-control" ng-model="q" type="search" placeholder="Search a defect" aria-label="filter defects">	
+					</div>
+					<ul class="list-group">
+						<li class="list-group-item col-xs-7 col-sm-9" ng-repeat="defect in defects | filter:q as results">
+							<div class="status col-xs-1">{{defect.status_defect}}</div>
+							<h4 class="list-group-item-heading col-xs-11">{{defect.name}} <a ui-sref="cases({id:defect.project_id})">{{defect.project_name}}</a></h4>
+							
+							<a ui-sref="detailDefect({defectid:defect.id})"><span class="glyphicon glyphicon-eye-open"></span></a>
+							<a ui-sref="editDefect({defectid:defect.id})"><span class="glyphicon glyphicon-pencil"></span></a>
+					    </li>
+					    <li class="list-group-item col-xs-7 col-sm-9" ng-if="results.length == 0">
+					    	<strong>No results found</strong>
+					    </li>
+					</ul>
+					<p ng-hide="defects">You have no projects</p>
+					<br/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

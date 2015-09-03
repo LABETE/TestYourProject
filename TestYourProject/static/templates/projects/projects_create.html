@@ -1,0 +1,19 @@
+<div class="container" ng-controller="ProjectCreateController" ng-show="authenticated">
+	<div class="row">
+		<div class="col-xs-3">
+			<a ui-sref="projects"><h3>Projects</h3></a>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h2>New Project</h2>
+			<!-- Load the projects_form.html template and create form -->
+			<form class="form-horizontal" ng-submit="createProject()" role="form" novalidate>
+				<div ng-include="'/static/templates/projects/projects_form.html'"></div>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-primary">Create</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

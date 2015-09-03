@@ -1,0 +1,45 @@
+<div class="container" ng-controller="DefectDetailController" ng-show="authenticated">
+	<div class="row">
+		<div class="col-xs-12">
+			<a ui-sref="defects"><h3>Defects</h3></a>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>{{ defect.name }}</h2>
+			</div>
+			<div class="panel-body" ng-controller="UserListController">
+				<p><strong>Owner:</strong> 
+					<br/>
+					<div ng-repeat="user in users" ng-if="user.id==defect.owner">
+					{{ user.username }}
+					</div>
+				</p>
+				<p><strong>Owner:</strong> 
+					<br/>
+					<div ng-repeat="user in users" ng-if="user.id==defect.assigned">
+					{{ user.username }}
+					</div>
+				</p>
+				<p><strong>Created:</strong> 
+				<br/> {{ defect.created }}</p>
+				<p><strong>Modified:</strong> 
+				<br/> {{ defect.modified }}</p>
+				<div ng-controller="ProjectListController">
+					<p><strong>Project:</strong> 
+						<br/>
+						<div ng-repeat="project in projects" ng-if="project.id==defect.project_id">
+						{{ project.name }}
+						</div>
+					</p>
+				</div>
+				<p><strong>Description:</strong> 
+				<br/> {{ defect.description }}</p>
+				<p><strong>Defect Track:</strong> 
+				<br/> {{ defect.tracking }}</p>
+			</div>		
+		</div>
+		    <p ng-hide="authenticated">You have no access to this defect, please contact to the defect owner.</p>
+			<button type="button" class="btn btn-primary" ui-sref="editDefect({defectid:defect.defectid})">Edit</button>
+	</div>
+</div>
+

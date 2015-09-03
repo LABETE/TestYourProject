@@ -1,0 +1,33 @@
+<div class="container" ng-controller="CaseDetailController" ng-show="authenticated">
+	<div class="row" ng-controller="ProjectListController">
+		<div class="col-xs-12" ng-repeat="project in projects" ng-if="project.id==projectid">
+			<h3><a ui-sref="projects">Projects</a>/<a ui-sref="cases({id:projectid})">{{project.name}}</a></h3>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>{{ testcase.name }}</h2>
+			</div>
+			<div class="panel-body" ng-controller="UserListController">
+				<p><strong>Owner:</strong> 
+					<br/>
+					<div ng-repeat="user in users" ng-if="user.id==testcase.owner">
+					{{ user.username }}
+					</div>
+				</p>
+				<p><strong>Description:</strong> 
+				<br/> {{ testcase.description }}</p>
+				<p><strong>Start Date:</strong> 
+				<br/> {{ testcase.start_date }}</p>
+				<p><strong>End Date:</strong> 
+				<br/> {{ testcase.end_date }}</p>
+				<p><strong>Created:</strong> 
+				<br/> {{ testcase.created }}</p>
+				<p><strong>Modified:</strong> 
+				<br/> {{ testcase.modified }}</p>
+			</div>		
+		</div>
+		    <p ng-hide="authenticated">You have no access to this test case, please contact to the test case owner.</p>
+			<button type="button" class="btn btn-primary" ui-sref="editCase({id:projectid,caseid:testcase.id})">Edit</button>
+	</div>
+</div>
+

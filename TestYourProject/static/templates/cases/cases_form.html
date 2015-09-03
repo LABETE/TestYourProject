@@ -1,0 +1,42 @@
+<div id="div_id_name" class="form-group">
+	<label for="id_name" class="control-label">Name*</label>
+	<div class="controls">
+		<input ng-model="testcase.name" type="text" name="name" id="id_name" class="textinput textInput form-control" maxlength="200" value="" ng-required="true" pattern="" title="">
+	</div>
+</div>
+<div id="owners" ng-controller="UserListController">
+	<div id="div_id_owner" class="form-group">
+		<label for="id_owner" class="control-label">Owner*</label>
+		<div class="controls">
+			<ui-select ng-model="testcase.owner" name="owner" theme="bootstrap" id="id_owner">	
+				<ui-select-match>{{$select.selected.username}}
+				</ui-select-match>
+				<ui-select-choices repeat="user.id as user in users | filter: $select.search">
+					<div ng-bind-html="user.username | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+</div>
+<div id="div_id_description" class="form-group">
+	<label for="id_description" class="control-label">Description</label>
+	<div class="controls">
+		<textarea ng-model="testcase.description" rows="5" name="description" id="id_description" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+	</div>
+</div>
+<div id="dates" ng-controller="Datepicker">
+	<div  id="div_id_start_date" class="form-group">
+		<label for="id_start_date" class="control-label">Start date</label>
+		<p class="input-group">
+			<div class="controls">
+				<input datepicker-popup="{{format}}" min-date="minDate.start_date" max-date="maxDate.start_date" ng-change="changeMinDate('end_date')" is-open="datepickers.start_date" ng-click="open($event, 'start_date')" type="text" ng-model="testcase.start_date"  name="start_date" id="id_start_date" class="textinput textInput form-control" value="" required="" pattern="" title="">
+			</div>
+		</p>
+	</div>
+	<div id="div_id_end_date" class="form-group">
+		<label for="id_end_date" class="control-label">End date</label>
+		<div class="controls">
+			<input datepicker-popup="{{format}}" min-date="minDate.end_date" max-date="maxDate.end_date"ng-change="changeMaxDate('start_date')" is-open="datepickers.end_date" ng-click="open($event, 'end_date')" type="text" ng-model="testcase.end_date" name="end_date" id="id_end_date" class="textinput textInput form-control" value="" required="" pattern="" title="">
+		</div>
+	</div>
+</div>

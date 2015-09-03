@@ -1,0 +1,74 @@
+<div id="div_id_name" class="form-group">
+	<label for="id_name" class="control-label">Name*</label>
+	<div class="controls">
+		<input ng-model="defect.name" type="text" name="name" id="id_name" class="textinput textInput form-control" maxlength="200" value="" ng-required="true" pattern="" title="">
+	</div>
+</div>
+<div id="div_id_status_defect" class="form-group">
+	<label for="id_status_defect" class="control-label">Status</label>
+	<div class="controls">
+		<ui-select ng-model="defect.status_defect" name="status_defect" theme="bootstrap" id="id_status_defect">	
+			<ui-select-match>{{$select.selected.name}}
+			</ui-select-match>
+			<ui-select-choices repeat="choice.id as choice in statusdefectchoices | filter: $select.search">
+				<div ng-bind-html="choice.name | highlight: $select.search"></div>
+			</ui-select-choices>
+		</ui-select>
+	</div>
+</div>
+<div>
+	<div id="project">
+		<div id="div_id_project" class="form-group">
+			<label for="id_project" class="control-label">Project*</label>
+			<div class="controls">
+				<ui-select ng-model="defect.project_id" name="project" theme="bootstrap" id="id_project">	
+					<ui-select-match>{{$select.selected.name}}
+					</ui-select-match>
+					<ui-select-choices ng-click="changeProject()" repeat="project.id as project in projects | filter: $select.search">
+						<div ng-bind-html="project.name | highlight: $select.search"></div>
+					</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+	</div>
+	<div id="owner">
+		<div id="div_id_owner" class="form-group">
+			<label for="id_owner" class="control-label">Owner*</label>
+			<div class="controls">
+				<ui-select ng-click="allowedUsers()" ng-model="defect.owner" name="owner" theme="bootstrap" id="id_owner">
+					<ui-select-match>{{$select.selected.username}}
+					</ui-select-match>
+					<ui-select-choices repeat="user.id as user in users_to_display | filter: $select.search">
+						<div ng-bind-html="user.username | highlight: $select.search"></div>
+					</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+	</div>
+	<div id="assigned">
+		<div id="div_id_assigned" class="form-group">
+			<label for="id_assigned" class="control-label">Assigned*</label>
+			<div class="controls">
+				<ui-select ng-model="defect.assigned" name="assigned" theme="bootstrap" id="id_assigned">	
+					<ui-select-match>{{$select.selected.username}}
+					</ui-select-match>
+					<ui-select-choices repeat="user.id as user in users_to_display | filter: $select.search">
+						<div ng-bind-html="user.username | highlight: $select.search"></div>
+					</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="div_id_description" class="form-group">
+	<label for="id_description" class="control-label">Description</label>
+	<div class="controls">
+		<textarea ng-model="defect.description" rows="5" name="description" id="id_description" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+	</div>
+</div>
+<div id="div_id_tracking" class="form-group">
+	<label for="id_tracking" class="control-label">Tracking</label>
+	<div class="controls">
+		<textarea ng-model="defect.tracking" rows="5" name="tracking" id="id_tracking" class="textinput textInput form-control" value="" required="" pattern="" title=""></textarea> 
+	</div>
+</div>

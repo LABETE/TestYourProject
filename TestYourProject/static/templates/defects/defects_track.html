@@ -1,0 +1,28 @@
+<div class="container" ng-controller="DefectTrackController" ng-show="authenticated">
+	<div class="row">
+		<div class="col-xs-12">
+			<a ui-sref="defects"><h3>Defect Track</h3></a>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>{{ defect.name }}</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong>Project:</strong> 
+					<br/>
+					<div ng-repeat="project in projects" ng-if="project.id==defect.project_id">
+					{{ project.name }}
+					</div>
+				</p>
+				<p><strong>Description:</strong> 
+				<br/> {{ defect.description }}</p>
+				<p><strong>Defect Track:</strong> 
+				<br/></p>
+				
+			</div>		
+		</div>
+		    <p ng-hide="authenticated">You have no access to this defect, please contact to the defect owner.</p>
+			<button type="button" class="btn btn-primary" ui-sref="editDefect({defectid:defect.defectid})">Edit</button>
+	</div>
+</div>
+

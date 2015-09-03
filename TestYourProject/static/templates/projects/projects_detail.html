@@ -1,0 +1,41 @@
+<div class="container" ng-controller="ProjectDetailController" ng-show="authenticated">
+	<div class="row">
+		<div class="col-xs-12">
+			<a ui-sref="projects"><h3>Projects</h3></a>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>{{ project.name }}</h2>
+			</div>
+			<div class="panel-body" ng-controller="UserListController">
+				<p><strong>Owner:</strong> 
+					<br/>
+					<div ng-repeat="user in users" ng-if="user.id==project.owner">
+					{{ user.username }}
+					</div>
+				</p>
+				<p><strong>Description:</strong> 
+				<br/> {{ project.description }}</p>
+				<p><strong>Start Date:</strong> 
+				<br/> {{ project.start_date }}</p>
+				<p><strong>End Date:</strong> 
+				<br/> {{ project.end_date }}</p>
+				<p><strong>Created:</strong> 
+				<br/> {{ project.created }}</p>
+				<p><strong>Modified:</strong> 
+				<br/> {{ project.modified }}</p>
+				<p><strong>Co Owners:</strong>
+					<br/>
+					<div ng-repeat="user in users">
+						<div ng-repeat="co_owner in project.co_owners" ng-if="user.id==co_owner">
+						{{ user.username }}
+						</div>
+					</div>
+				</p>
+			</div>		
+		</div>
+		    <p>You have no access to this project, please contact to the project owner.</p>
+			<button type="button" class="btn btn-primary" ui-sref="editProject({id:project.id})">Edit</button>
+	</div>
+</div>
+

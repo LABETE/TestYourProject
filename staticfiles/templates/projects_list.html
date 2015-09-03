@@ -1,0 +1,31 @@
+<div class="container" ng-controller="ProjectListController">
+	<div class="row">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h2>Projects</h2>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<button type="button" class="btn btn-primary" ui-sref="createProject">Create New Project</button>
+					<ul class="list-group" ng-repeat="project in projects">
+						<li class="list-group-item col-xs-7 col-sm-9">
+							<div class="status col-xs-1">{{project.status}}</div>
+							<h4 class="list-group-item-heading col-xs-11">{{project.name}}</h4>
+							<span class="glyphicon glyphicon-eye-open"></span>
+								<span class="glyphicon glyphicon-pencil" ng-show="{{project.owner==request.user}}"></span>
+								<span class="glyphicon glyphicon-remove" ng-show="{{project.owner==$root.currentUser}}"></span>
+					    </li>
+					</ul>
+					<p ng-hide="projects">You have no projects</p>
+					<br/>
+					<button type="button" class="btn btn-primary col-md-offset-1">Search a Project</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--<div ui-view="create"></div>-->

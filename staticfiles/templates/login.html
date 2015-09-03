@@ -1,0 +1,24 @@
+<div class="container" ng-controller="AuthController">
+  <div class="row">
+    <div class="col-md-5">
+      <h2>Sign In</h2>
+      <p>Please login in with your account. Or, <a href="#">sign up</a>.</p>
+      <form class="form-horizontal" ng-submit="login()" role="form" novalidate>
+        <div id="div_id_username" class="form-group">
+          <label for="id_username" class="control-label">Userame</label>
+          <div class="controls">
+            <input ng-model="user.username" type="text" name="username" id="id_username" class="textinput textInput form-control" maxlength="200" value="" ng-required="true" pattern="" title="">
+          </div>
+        </div>
+        <div id="div_id_password" class="form-group">
+          <label for="id_password" class="control-label">Password</label>
+          <div class="controls">
+            <input ng-model="user.password" type="password" name="password" id="id_password" class="textinput textInput form-control" maxlength="200" value="" ng-required="true" pattern="" title="">
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Sign In</button>
+        <a class="button secondaryAction" href="#">Forgot Password?</a>
+      </form>
+    </div>
+  </div>
+</div>

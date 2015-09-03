@@ -1,0 +1,18 @@
+<div class="container" ng-controller="CaseCreateController" ng-show="authenticated">
+	<div class="row" ng-controller="ProjectListController">
+		<div class="col-xs-12" ng-repeat="project in projects" ng-if="project.id==projectid">
+			<h3><a ui-sref="projects">Projects</a>/<a ui-sref="cases({id:projectid})">{{project.name}}</a></h3>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h2>New Test Case</h2>
+			<form class="form-horizontal" ng-submit="createCase()" role="form" novalidate>
+				<div ng-include="'/static/templates/cases/cases_form.html'"></div>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-primary">Create</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
